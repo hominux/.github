@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Outline igloo house with a penguin sitting inside">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d2740"/>
+      <stop offset="1" stop-color="#1f5686"/>
+    </linearGradient>
+    <clipPath id="room"><rect x="126" y="100" width="260" height="316"/></clipPath>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#sky)"/>
+  <g fill="#ffffff" opacity=".7">
+    <circle cx="64" cy="96" r="3"/><circle cx="452" cy="158" r="2.5"/><circle cx="92" cy="170" r="2"/>
+    <circle cx="470" cy="60" r="2"/><circle cx="170" cy="48" r="2"/><circle cx="446" cy="360" r="2"/>
+  </g>
+
+  <g clip-path="url(#room)" stroke="#bfe6f7" stroke-width="3" opacity=".28" fill="none">
+    <path d="M126 250H386M126 300H386M126 350H386M126 400H386"/>
+    <path d="M190 250V300M262 250V300M334 250V300"/>
+    <path d="M154 300V350M226 300V350M298 300V350M370 300V350"/>
+    <path d="M190 350V400M262 350V400M334 350V400"/>
+  </g>
+
+  <g fill="none" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M112 228V430H400.5V228" stroke="#bfe6f7"/>
+    <path d="M343 82H401.6V124" stroke="#bfe6f7"/>
+    <path d="M54 214L256 77L458 214" stroke="#f7fcff"/>
+  </g>
+
+  <g>
+    <path d="M196 322Q166 360 184 396Q206 392 214 350Z" fill="#1b1f27"/>
+    <path d="M316 322Q346 360 328 396Q306 392 298 350Z" fill="#1b1f27"/>
+    <ellipse cx="256" cy="352" rx="62" ry="64" fill="#1b1f27"/>
+    <circle cx="256" cy="278" r="42" fill="#1b1f27"/>
+    <ellipse cx="256" cy="362" rx="40" ry="48" fill="#f6f8fb"/>
+    <circle cx="241" cy="270" r="12" fill="#f6f8fb"/>
+    <circle cx="271" cy="270" r="12" fill="#f6f8fb"/>
+    <circle cx="243" cy="272" r="4.8" fill="#1b1f27"/>
+    <circle cx="269" cy="272" r="4.8" fill="#1b1f27"/>
+    <path d="M238 288Q256 281 274 288L256 311Z" fill="#f59e0b"/>
+    <ellipse cx="222" cy="412" rx="26" ry="10" fill="#f59e0b"/>
+    <ellipse cx="290" cy="412" rx="26" ry="10" fill="#f59e0b"/>
+  </g>
+</svg>
