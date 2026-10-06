@@ -16,3 +16,32 @@ to every repository that does not define its own. `profile/README.md` renders on
 
 Changes here affect every repository in the organization. Open a pull request; `CODEOWNERS` requests review from
 `@hominux/maintainers`.
+
+## Reusable workflows
+
+### `announce-release.yml`
+
+Posts "`<repo> <tag> released.`" with the release link to Mastodon and Bluesky. It skips drafts and pre-releases, and
+skips a platform whose secrets are unset. Call it from a repository:
+
+```yaml
+name: Announce release
+
+on:
+  release:
+    types: [published]
+
+permissions: {}
+
+jobs:
+  announce:
+    uses: hominux/.github/.github/workflows/announce-release.yml@main
+    secrets:
+      MASTODON_INSTANCE_URL: ${{ secrets.MASTODON_INSTANCE_URL }}
+      MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+      BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+      BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+```
+
+Set the four secrets at the organization level and grant the calling repositories access. Releases that a workflow
+publishes with the default `GITHUB_TOKEN` do not trigger the `release` event; publish with an app or personal token.
