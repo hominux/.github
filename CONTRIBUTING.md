@@ -16,6 +16,6 @@ For a security problem, follow [SECURITY.md](SECURITY.md) instead.
 4. Add tests for new behavior and confirm the status checks pass.
 
 Library-specific rules (code style, build, API compatibility checks) live in the
-[compress4j CONTRIBUTING guide](https://github.com/compress4j/compress4j/blob/main/.github/CONTRIBUTING.adoc).
+[compress4j CONTRIBUTING guide](https://github.com/hominux/compress4j/blob/main/.github/CONTRIBUTING.adoc).
 
 Contributions are accepted under the license the repository declares.

@@ -1,12 +1,23 @@
-# Compress4J
+# Hominux
 
-A simple archiving and compression library for Java, built as a thin API layer over
-[Apache Commons Compress](https://commons.apache.org/proper/commons-compress/).
+Small, focused open-source libraries and tooling for Java and contract testing. We build software that does one
+job well, ships with clear documentation, and stays easy to adopt and maintain.
 
-[Documentation](https://compress4j.github.io) · [Maven Central](https://central.sonatype.com/artifact/io.github.compress4j/compress4j) · [Releases](https://github.com/compress4j/compress4j/releases)
+## Mission
 
-## Repositories
+Every tool here exists because I needed it and it wasn't there. Hominux builds those missing tools so the next developer
+doesn't have to struggle through the same gap.
 
-- [compress4j](https://github.com/compress4j/compress4j): the library. Requires Java 21+.
-- [compress4j.github.io](https://github.com/compress4j/compress4j.github.io): documentation site.
-- [docs-ui-bundle](https://github.com/compress4j/docs-ui-bundle): Antora UI bundle for the docs site.
+## Projects
+
+- [compress4j](https://github.com/hominux/compress4j): archiving and compression library for Java 21+, a thin API
+  layer over Apache Commons Compress. Successor to the unmaintained jarchivelib. [Docs](https://hominux.github.io) ·
+  [Maven Central](https://central.sonatype.com/artifact/io.github.compress4j/compress4j)
+- [pact-avro-plugin](https://github.com/hominux/pact-avro-plugin): Pact plugin, written in Rust, for contract testing
+  messages serialised with Apache Avro.
+- [docs-ui-bundle](https://github.com/hominux/docs-ui-bundle): Antora UI bundle for our documentation sites.
+
+## Contributing
+
+Read the [contribution guide](https://github.com/hominux/.github/blob/main/CONTRIBUTING.md), then open an issue or a
+pull request on the relevant repository. Security reports go through [SECURITY.md](https://github.com/hominux/.github/blob/main/SECURITY.md).
