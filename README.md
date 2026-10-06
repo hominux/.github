@@ -1,7 +1,7 @@
 # .github
 
-Organization-wide defaults for [Hominux](https://github.com/hominux). GitHub applies these files to every repository
-that does not define its own.
+Organization-wide defaults for [Hominux](https://github.com/hominux). GitHub applies the community-health files below
+to every repository that does not define its own. `profile/README.md` renders on the organization page instead.
 
 | Path | Purpose |
 | --- | --- |
