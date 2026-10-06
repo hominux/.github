@@ -21,21 +21,20 @@ Changes here affect every repository in the organization. Open a pull request; `
 
 ### `announce-release.yml`
 
-Posts "`<repo> <tag> released.`" with the release link to Mastodon and Bluesky. It skips drafts and pre-releases, and
-skips a platform whose secrets are unset. Call it from a repository:
+Posts "`<repo> <tag> released.`" with the release link to Mastodon and Bluesky. It skips pre-releases, and skips a
+platform whose secrets are unset. Inputs: `tag` (required), `url` (defaults to the tag's release page), `prerelease`.
+
+Call it as a job in the workflow that creates the release, after the publish job. A release created with the default
+`GITHUB_TOKEN` does not fire the `release` event, so a separate `on: release` workflow would never run.
 
 ```yaml
-name: Announce release
-
-on:
-  release:
-    types: [published]
-
-permissions: {}
-
-jobs:
   announce:
+    needs: [plan, publish]
+    if: ${{ needs.plan.outputs.dry_run != 'true' }}
+    permissions: {}
     uses: hominux/.github/.github/workflows/announce-release.yml@main
+    with:
+      tag: v${{ needs.plan.outputs.version }}
     secrets:
       MASTODON_INSTANCE_URL: ${{ secrets.MASTODON_INSTANCE_URL }}
       MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
@@ -43,5 +42,4 @@ jobs:
       BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
 ```
 
-Set the four secrets at the organization level and grant the calling repositories access. Releases that a workflow
-publishes with the default `GITHUB_TOKEN` do not trigger the `release` event; publish with an app or personal token.
+Set the four secrets at the organization level and grant the calling repositories access.
