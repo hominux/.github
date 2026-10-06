@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Igloo house with a penguin standing in front">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d2740"/>
+      <stop offset="1" stop-color="#1f5686"/>
+    </linearGradient>
+    <clipPath id="body-clip"><rect x="126" y="262" width="260" height="150"/></clipPath>
+    <clipPath id="chimney-clip"><rect x="316" y="124" width="46" height="120"/></clipPath>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#sky)"/>
+  <g fill="#ffffff" opacity=".7">
+    <circle cx="70" cy="90" r="3"/><circle cx="440" cy="150" r="3"/><circle cx="96" cy="200" r="2"/>
+    <circle cx="430" cy="60" r="2"/><circle cx="170" cy="60" r="2"/><circle cx="460" cy="260" r="2"/>
+  </g>
+
+  <ellipse cx="262" cy="424" rx="196" ry="30" fill="#e8f6fc"/>
+
+  <g clip-path="url(#chimney-clip)">
+    <rect x="316" y="100" width="46" height="150" fill="#c9e6f4"/>
+    <g stroke="#8fc9e6" stroke-width="2.5" fill="none">
+      <path d="M316 150H362M316 180H362M316 210H362"/>
+      <path d="M339 124V150M327 150V180M351 150V180M339 180V210"/>
+    </g>
+  </g>
+  <rect x="316" y="124" width="46" height="120" fill="none" stroke="#8fc9e6" stroke-width="3"/>
+
+  <rect x="306" y="112" width="66" height="16" rx="5" fill="#eaf7fd" stroke="#8fc9e6" stroke-width="3"/>
+
+  <rect x="126" y="262" width="260" height="150" fill="#dff3fb"/>
+  <g clip-path="url(#body-clip)" stroke="#8fc9e6" stroke-width="2.5" fill="none">
+    <path d="M126 300H386M126 338H386M126 376H386"/>
+    <path d="M190 262V300M262 262V300M334 262V300"/>
+    <path d="M154 300V338M226 300V338M298 300V338M370 300V338"/>
+    <path d="M190 338V376M262 338V376M334 338V376"/>
+    <path d="M154 376V412M226 376V412M298 376V412M370 376V412"/>
+  </g>
+  <rect x="126" y="262" width="260" height="150" fill="none" stroke="#8fc9e6" stroke-width="3"/>
+
+  <rect x="126" y="262" width="260" height="10" fill="#b8def0"/>
+  <path d="M104 266L256 150L408 266Z" fill="#f7fcff" stroke="#8fc9e6" stroke-width="4" stroke-linejoin="round"/>
+  <g fill="none" stroke="#cfe9f5" stroke-width="3" stroke-linecap="round">
+    <path d="M150 238L256 164L362 238"/>
+  </g>
+  <g fill="#f7fcff">
+    <circle cx="128" cy="266" r="10"/><circle cx="162" cy="268" r="8"/><circle cx="212" cy="267" r="9"/>
+    <circle cx="300" cy="267" r="9"/><circle cx="350" cy="268" r="8"/><circle cx="384" cy="266" r="10"/>
+  </g>
+
+  <path d="M230 412V352a26 26 0 0 1 52 0V412Z" fill="#17466f" stroke="#8fc9e6" stroke-width="3"/>
+  <circle cx="272" cy="386" r="3" fill="#ffd36b"/>
+
+  <g>
+    <rect x="152" y="306" width="44" height="40" rx="4" fill="#ffd36b" stroke="#8fc9e6" stroke-width="3"/>
+    <path d="M174 306V346M152 326H196" stroke="#c98a1a" stroke-width="3"/>
+  </g>
+
+  <ellipse cx="350" cy="440" rx="52" ry="9" fill="#9fcde3" opacity=".7"/>
+  <g>
+    <path d="M316 346Q290 372 302 404Q322 396 328 366Z" fill="#1b1f27"/>
+    <path d="M384 346Q410 372 398 404Q378 396 372 366Z" fill="#1b1f27"/>
+    <ellipse cx="350" cy="372" rx="40" ry="66" fill="#1b1f27"/>
+    <circle cx="350" cy="320" r="30" fill="#1b1f27"/>
+    <ellipse cx="350" cy="380" rx="26" ry="50" fill="#f6f8fb"/>
+    <circle cx="339" cy="314" r="9" fill="#f6f8fb"/>
+    <circle cx="361" cy="314" r="9" fill="#f6f8fb"/>
+    <circle cx="340" cy="315" r="3.6" fill="#1b1f27"/>
+    <circle cx="360" cy="315" r="3.6" fill="#1b1f27"/>
+    <path d="M337 326Q350 321 363 326L350 343Z" fill="#f59e0b"/>
+    <ellipse cx="333" cy="438" rx="16" ry="7" fill="#f59e0b"/>
+    <ellipse cx="367" cy="438" rx="16" ry="7" fill="#f59e0b"/>
+  </g>
+</svg>
