@@ -2,6 +2,19 @@ name: Announce release
 
 on:
   workflow_call:
+    inputs:
+      tag:
+        description: Release tag, for example v1.2.3.
+        type: string
+        required: true
+      url:
+        description: Release page URL. Defaults to the release page of the tag in the calling repository.
+        type: string
+        default: ''
+      prerelease:
+        description: Skip the announcement when true.
+        type: boolean
+        default: false
     secrets:
       MASTODON_INSTANCE_URL:
         required: false
@@ -15,11 +28,9 @@ on:
 permissions: {}
 
 env:
-  PUBLISHABLE: ${{ github.event_name == 'release' && !github.event.release.prerelease && !github.event.release.draft }}
-  REPO_NAME: ${{ github.event.repository.name }}
-  TAG: ${{ github.event.release.tag_name }}
-  URL: ${{ github.event.release.html_url }}
-  RELEASE_ID: ${{ github.event.release.id }}
+  PRERELEASE: ${{ inputs.prerelease }}
+  TAG: ${{ inputs.tag }}
+  URL: ${{ inputs.url || format('{0}/{1}/releases/tag/{2}', github.server_url, github.repository, inputs.tag) }}
 
 jobs:
   mastodon:
@@ -32,14 +43,14 @@ jobs:
           MASTODON_INSTANCE_URL: ${{ secrets.MASTODON_INSTANCE_URL }}
           MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
         run: |
-          [ "$PUBLISHABLE" = true ] || { echo "::notice::Not a published release, skipping"; exit 0; }
+          [ "$PRERELEASE" = false ] || { echo "::notice::Pre-release, skipping"; exit 0; }
           [ -n "$MASTODON_INSTANCE_URL" ] && [ -n "$MASTODON_ACCESS_TOKEN" ] \
             || { echo "::notice::Mastodon secrets not set, skipping"; exit 0; }
           curl --fail-with-body --silent --show-error \
             --request POST "${MASTODON_INSTANCE_URL%/}/api/v1/statuses" \
             --header "Authorization: Bearer $MASTODON_ACCESS_TOKEN" \
-            --header "Idempotency-Key: release-$RELEASE_ID" \
-            --data-urlencode "status=$REPO_NAME $TAG released.
+            --header "Idempotency-Key: release-${GITHUB_REPOSITORY}-${TAG}" \
+            --data-urlencode "status=${GITHUB_REPOSITORY#*/} $TAG released.
           $URL" \
             --data-urlencode "visibility=public" \
             --output /dev/null
@@ -54,7 +65,7 @@ jobs:
           BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
         run: |
-          [ "$PUBLISHABLE" = true ] || { echo "::notice::Not a published release, skipping"; exit 0; }
+          [ "$PRERELEASE" = false ] || { echo "::notice::Pre-release, skipping"; exit 0; }
           [ -n "$BLUESKY_HANDLE" ] && [ -n "$BLUESKY_APP_PASSWORD" ] \
             || { echo "::notice::Bluesky secrets not set, skipping"; exit 0; }
           python3 - <<'PY'
@@ -87,7 +98,7 @@ jobs:
           def main():
               env = os.environ
               url = env["URL"]
-              text = f"{env['REPO_NAME']} {env['TAG']} released.\n{url}"
+              text = f"{os.environ['GITHUB_REPOSITORY'].split('/')[1]} {env['TAG']} released.\n{url}"
               session = call(
                   "com.atproto.server.createSession",
                   {"identifier": env["BLUESKY_HANDLE"], "password": env["BLUESKY_APP_PASSWORD"]},
