@@ -21,8 +21,9 @@ Changes here affect every repository in the organization. Open a pull request; `
 
 ### `announce-release.yml`
 
-Posts "`<repo> <tag> released.`" with the release link to Mastodon and Bluesky. It skips pre-releases, and skips a
-platform whose secrets are unset. Inputs: `tag` (required), `url` (defaults to the tag's release page), `prerelease`.
+Posts "`<repo> <tag> released.`" with the release link to Mastodon and Bluesky. It skips pre-releases, patch releases
+(`x.y.Z` with `Z` above 0), and any platform whose secrets are unset. Inputs: `tag` (required), `url` (defaults to the
+tag's release page), `prerelease`, and `announce-patch` to announce a patch release such as a security fix.
 
 Call it as a job in the workflow that creates the release, after the publish job. A release created with the default
 `GITHUB_TOKEN` does not fire the `release` event, so a separate `on: release` workflow would never run.
