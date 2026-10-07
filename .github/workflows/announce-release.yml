@@ -15,6 +15,10 @@ on:
         description: Skip the announcement when true.
         type: boolean
         default: false
+      announce-patch:
+        description: Announce patch releases (x.y.Z with Z above 0), which are skipped by default.
+        type: boolean
+        default: false
     secrets:
       MASTODON_INSTANCE_URL:
         required: false
@@ -29,12 +33,34 @@ permissions: {}
 
 env:
   PRERELEASE: ${{ inputs.prerelease }}
+  ANNOUNCE_PATCH: ${{ inputs.announce-patch }}
   TAG: ${{ inputs.tag }}
   URL: ${{ inputs.url || format('{0}/{1}/releases/tag/{2}', github.server_url, github.repository, inputs.tag) }}
 
 jobs:
+  plan:
+    name: Decide whether to announce
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    outputs:
+      announce: ${{ steps.decide.outputs.announce }}
+    steps:
+      - name: Decide
+        id: decide
+        run: |
+          announce=true
+          if [ "$PRERELEASE" = true ]; then
+            announce=false; echo "::notice::Pre-release, skipping"
+          elif [ "$ANNOUNCE_PATCH" != true ] && [[ "$TAG" =~ ^v?[0-9]+\.[0-9]+\.([0-9]+)([-+].*)?$ ]] \
+            && (( 10#${BASH_REMATCH[1]} != 0 )); then
+            announce=false; echo "::notice::Patch release $TAG, skipping"
+          fi
+          echo "announce=$announce" >> "$GITHUB_OUTPUT"
+
   mastodon:
     name: Post to Mastodon
+    needs: plan
+    if: needs.plan.outputs.announce == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -43,7 +69,6 @@ jobs:
           MASTODON_INSTANCE_URL: ${{ secrets.MASTODON_INSTANCE_URL }}
           MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
         run: |
-          [ "$PRERELEASE" = false ] || { echo "::notice::Pre-release, skipping"; exit 0; }
           [ -n "$MASTODON_INSTANCE_URL" ] && [ -n "$MASTODON_ACCESS_TOKEN" ] \
             || { echo "::notice::Mastodon secrets not set, skipping"; exit 0; }
           curl --fail-with-body --silent --show-error \
@@ -57,6 +82,8 @@ jobs:
 
   bluesky:
     name: Post to Bluesky
+    needs: plan
+    if: needs.plan.outputs.announce == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -65,7 +92,6 @@ jobs:
           BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
         run: |
-          [ "$PRERELEASE" = false ] || { echo "::notice::Pre-release, skipping"; exit 0; }
           [ -n "$BLUESKY_HANDLE" ] && [ -n "$BLUESKY_APP_PASSWORD" ] \
             || { echo "::notice::Bluesky secrets not set, skipping"; exit 0; }
           python3 - <<'PY'
