@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="C-clamp squeezing a folder labelled 4J">
+  <g transform="scale(8)" stroke-linejoin="round" stroke-linecap="round">
+    <g fill="none">
+      <path d="M41 6.5H14Q8.5 6.5 8.5 13V39Q8.5 46 14 46H41" stroke="#445055" stroke-width="9.6"/>
+      <path d="M41 6.5H14Q8.5 6.5 8.5 13V39Q8.5 46 14 46H41" stroke="#8e99a2" stroke-width="6.4"/>
+    </g>
+    <rect x="33" y="48" width="4" height="7" fill="#8e99a2" stroke="#445055" stroke-width="1.6"/>
+    <rect x="24" y="54.5" width="26" height="5" rx="2.5" fill="#8e99a2" stroke="#445055" stroke-width="1.6"/>
+    <path d="M18 18V12.8H35.5L38.5 15.2H57.5V18Z" fill="#ae7632" stroke="#744f18" stroke-width="1.8"/>
+    <rect x="15" y="17.5" width="42" height="22.5" fill="#ae7632" stroke="#744f18" stroke-width="1.8"/>
+    <g fill="none" stroke="#fefefe" stroke-width="2.6" stroke-linejoin="miter" stroke-linecap="butt">
+      <path d="M34.5 37V24.5L28.3 33.2H38.5"/>
+      <path d="M47.2 24.5V33Q47.2 35.6 44.6 35.6H42.5" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>
